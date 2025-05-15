@@ -3,6 +3,8 @@ from cls.fcl import FiniteCombinatoryLogic
 from cls.subtypes import Subtypes
 from cls_luigi.inhabitation_task import LuigiCombinator, ClsParameter, RepoMeta
 
+from utils import print_tree
+
 
 class TaskA(luigi.Task, LuigiCombinator):
     abstract = False
@@ -43,6 +45,10 @@ if __name__ == '__main__':
     validator = RepoMeta.get_unique_abstract_task_validator()
     results = [t() for t in inhabitation_result.evaluated[0:max_results]
                if validator.validate(t())]
+
+    for r in results:
+        print(print_tree(r))
+
     if results:
         print("Number of results", max_results)
         print("Number of results after filtering", len(results))

@@ -19,6 +19,8 @@ from sklearn.linear_model import LinearRegression, LassoLars
 
 from os.path import join as pjoin
 
+from utils import print_tree
+
 output_dir = "output"
 
 
@@ -180,6 +182,9 @@ if __name__ == '__main__':
     nx.write_graphml(hypergraph, pjoin(output_dir, "grammar_nx_hypergraph.graphml"))
     render_hypergraph_components(hypergraph, pjoin(output_dir, "grammar_hypergraph.png"), node_size=9000,
                                  node_font_size=11, show=True)
+
+    for r in results:
+        print(print_tree(r))
 
     if results:
         print("Number of pipelines", len(results))
